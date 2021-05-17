@@ -20,7 +20,7 @@ class Game:
         while ready_to_play != 'no':
             ready_to_play = input("\nReady to play? ('yes' to play, 'no' to end) ")
             if ready_to_play == 'yes':
-                self.select_players_two_AI()
+                self.select_players_two_ai()
                 self.select_score_to_win()
                 print(f"\nLet's play!")
                 while self.player_one.score < self.score_to_win and self.player_two.score < self.score_to_win:
@@ -38,11 +38,9 @@ class Game:
     def display_gestures(self):
         GestureOptions().create_gesture_list()
         gestures = GestureOptions().list
-        i = 0
-        while i < len(gestures):
-            print(f"{gestures[i].name} {gestures[i].attack_words[0]} {gestures[i].beats[0]} and "
-                  f"{gestures[i].attack_words[1]} {gestures[i].beats[1]}")
-            i += 1
+        for element in gestures:
+            print(f"{element.name} {element.attack_words[0]} {element.beats[0]} and "
+                  f"{element.attack_words[1]} {element.beats[1]}")
 
     def select_players(self):
         player_one = Human()
@@ -64,7 +62,7 @@ class Game:
         self.player_one = player_one
         self.player_two = player_two
 
-    def select_players_two_AI(self):
+    def select_players_two_ai(self):
         player_one = Human()
         player_one.choose_name()
         user_input = 'word'
@@ -96,13 +94,13 @@ class Game:
         while user_input == 'word':
             try:
                 user_input = input(f"\nEnter the number of rounds needed to win (enter '2' for best 2 out of 3, etc.). "
-                                   f"Maximum is 5, minimum is 2. ")
+                                   f"Maximum is 7, minimum is 2. ")
                 user_input = int(user_input)
-                if user_input > 5 or user_input <= 1:
+                if user_input > 7 or user_input <= 1:
                     self.score_to_win = 2
                     print("\nThat number is outside of the permitted range! Score to win has been automatically set "
                           "to 2.")
-                elif 2 <= user_input <= 5:
+                elif 2 <= user_input <= 7:
                     self.score_to_win = user_input
                     print(f"\nScore to win has been set to {user_input}.")
             except ValueError:
@@ -110,8 +108,6 @@ class Game:
                 print("\nOops! Invalid input. Try again...")
 
     def game_round(self):
-        # print("\nHere are all the available gestures:\n")
-        # self.display_gestures()
         self.player_one.gesture.name = 'rock'
         self.player_two.gesture.name = 'rock'
         while self.player_one.gesture.name == self.player_two.gesture.name:
@@ -134,4 +130,5 @@ class Game:
             print(f"\n{self.player_one.gesture.name} {attack_word} {self.player_two.gesture.name}...\n"
                   f"{self.player_one.name} wins the round! ")
         print(f"\n{self.player_one.name} score: {self.player_one.score}\n"
-              f"{self.player_two.name} score: {self.player_two.score}")
+              f"{self.player_two.name} score: {self.player_two.score}"
+              f"\nScore needed to win: {self.score_to_win}")
