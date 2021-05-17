@@ -1,5 +1,5 @@
 from ai import AI
+from human import Human
 
 if __name__ == '__main__':
-    ai_guy = AI()
-    print(ai_guy.name)
+    Human().throw_gesture()
