@@ -8,7 +8,7 @@ class Human(Player):
         super().__init__()
 
     def choose_name(self):
-        self.name = input("Enter your name: ")
+        self.name = input("\nEnter your name: ")
 
     def choose_gesture(self):
         gesture = ''

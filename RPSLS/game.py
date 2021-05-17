@@ -1,4 +1,3 @@
-from gesture import Gesture
 from human import Human
 from ai import AI
 from gesture_options import GestureOptions
@@ -21,7 +20,7 @@ class Game:
         while ready_to_play != 'no':
             ready_to_play = input("\nReady to play? ('yes' to play, 'no' to end) ")
             if ready_to_play == 'yes':
-                self.select_players()
+                self.select_players_two_AI()
                 self.select_score_to_win()
                 print(f"\nLet's play!")
                 while self.player_one.score < self.score_to_win and self.player_two.score < self.score_to_win:
@@ -65,18 +64,45 @@ class Game:
         self.player_one = player_one
         self.player_two = player_two
 
+    def select_players_two_AI(self):
+        player_one = Human()
+        player_one.choose_name()
+        user_input = 'word'
+        while user_input == 'word':
+            user_input = input(f"\nHello {player_one.name}! Would you like to play single-player or multiplayer? "
+                               f"Enter '1' for single-player or '2' for multiplayer. Or, press '3' to watch two "
+                               f"AIs battle it out! ")
+            if user_input == '1':
+                print("\nYou have selected single-player! You will play against an AI opponent.")
+                player_two = AI()
+            elif user_input == '2':
+                print("\nYou have selected multiplayer! Player two, please enter your name below. ")
+                player_two = Human()
+                player_two.choose_name()
+            elif user_input == '3':
+                print("\nYou have selected an AI game!")
+                player_one = AI()
+                player_one.name = input("\nEnter a name for AI player one: ")
+                player_two = AI()
+                player_two.name = input("\nENter a name for AI player two: ")
+            else:
+                user_input = 'word'
+                print("\nOops! Invalid input. Try again... ")
+        self.player_one = player_one
+        self.player_two = player_two
+
     def select_score_to_win(self):
         user_input = 'word'
         while user_input == 'word':
             try:
                 user_input = input(f"\nEnter the number of rounds needed to win (enter '2' for best 2 out of 3, etc.). "
-                                   f"Maximum is 5. ")
+                                   f"Maximum is 5, minimum is 2. ")
                 user_input = int(user_input)
-                if user_input > 5 or user_input <= 0:
+                if user_input > 5 or user_input <= 1:
                     self.score_to_win = 2
                     print("\nThat number is outside of the permitted range! Score to win has been automatically set "
                           "to 2.")
-                elif 0 < user_input <= 5:
+                elif 2 <= user_input <= 5:
                     self.score_to_win = user_input
                     print(f"\nScore to win has been set to {user_input}.")
             except ValueError:
