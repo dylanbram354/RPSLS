@@ -79,7 +79,7 @@ class Game:
                     self.score_to_win = 2
                     print("\nThat number is outside of the permitted range! Score to win has been automatically set "
                           "to 2.")
-                elif 0 < user_input < 5:
+                elif 0 < user_input <= 5:
                     self.score_to_win = user_input
                     print(f"\nScore to win has been set to {user_input}.")
             except ValueError:
@@ -95,8 +95,8 @@ class Game:
             player_one_choice = self.player_one.choose_gesture()
             player_two_choice = self.player_two.choose_gesture()
             if player_one_choice.name == player_two_choice.name:
-                print(f"Oops! You both chose {player_one_choice.name}. Let's go again!")
-        print(f"{self.player_one.name} chose {self.player_one.gesture.name}. {self.player_two.name} chose "
+                print(f"\nOops! You both chose {player_one_choice.name}. Let's go again!")
+        print(f"\n{self.player_one.name} chose {self.player_one.gesture.name}. {self.player_two.name} chose "
               f"{self.player_two.gesture.name}.")
         if self.player_one.gesture.name in self.player_two.gesture.beats:
             self.player_two.score += 1
