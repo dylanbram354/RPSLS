@@ -6,11 +6,11 @@ class GestureOptions:
         self.list = self.create_gesture_list()
 
     def create_gesture_list(self):
-        rock = Gesture('rock', ['scissors', 'lizard'], ['crushes', 'crushes'])
-        scissors = Gesture('scissors', ['paper', 'lizard'], ['cuts', 'decapitates'])
-        paper = Gesture('paper', ['rock', 'Spock'], ['covers', 'disproves'])
-        lizard = Gesture('lizard', ['Spock', 'paper'], ['poisons', 'eats'])
-        spock = Gesture('Spock', ['scissors', 'rock'], ['smashes', 'vaporizes'])
+        rock = Gesture('ROCK', ['SCISSORS', 'LIZARD'], ['crushes', 'crushes'])
+        scissors = Gesture('SCISSORS', ['PAPER', 'LIZARD'], ['cuts', 'decapitates'])
+        paper = Gesture('PAPER', ['ROCK', 'SPOCK'], ['covers', 'disproves'])
+        lizard = Gesture('LIZARD', ['SPOCK', 'PAPER'], ['poisons', 'eats'])
+        spock = Gesture('SPOCK', ['SCISSORS', 'ROCK'], ['smashes', 'vaporizes'])
 
         gesture_list = [rock, paper, scissors, lizard, spock]
 

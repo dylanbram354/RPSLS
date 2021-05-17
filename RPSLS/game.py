@@ -19,11 +19,11 @@ class Game:
         self.display_gestures()
         ready_to_play = 'yes'
         while ready_to_play != 'no':
-            ready_to_play = input("\nReady to play? (yes/no)")
+            ready_to_play = input("\nReady to play? ('yes' to play, 'no' to end) ")
             if ready_to_play == 'yes':
                 self.select_players()
                 self.select_score_to_win()
-                print(f"\nLet's play!\n")
+                print(f"\nLet's play!")
                 while self.player_one.score < self.score_to_win and self.player_two.score < self.score_to_win:
                     self.game_round()
                 if self.player_one.score == self.score_to_win:
@@ -34,7 +34,7 @@ class Game:
             elif ready_to_play == 'no':
                 print('\nSee you next time!')
             else:
-                print("Oops! Invalid input, try again...")
+                print("\nOops! Invalid input, try again...")
 
 
 
@@ -53,56 +53,62 @@ class Game:
         player_one.choose_name()
         user_input = 'word'
         while user_input == 'word':
-            user_input = input(f"Hello {player_one.name}! Would you like to play single-player or multiplayer? "
+            user_input = input(f"\nHello {player_one.name}! Would you like to play single-player or multiplayer? "
                                f"Enter '1' for single-player or '2' for multiplayer. ")
             if user_input == '1':
-                print("You have selected single-player! You will play against an AI opponent.")
+                print("\nYou have selected single-player! You will play against an AI opponent.")
                 player_two = AI()
             elif user_input == '2':
-                print("You have selected multiplayer! Player two, please enter your name below. ")
+                print("\nYou have selected multiplayer! Player two, please enter your name below. ")
                 player_two = Human()
                 player_two.choose_name()
             else:
                 user_input = 'word'
-                print("Oops! Invalid input. Try again... \n")
+                print("\nOops! Invalid input. Try again... ")
         self.player_one = player_one
         self.player_two = player_two
 
     def select_score_to_win(self):
         user_input = 'word'
         while user_input == 'word':
-            user_input == input(f"Enter the number of rounds needed to win (enter '2' for best 2 out of 3, etc.). "
-                                f"Maximum is 5.")
-            if user_input > 5:
-                print("That number is above the maximum allowed! Score to win has been set to 5.")
-            elif 0 < user_input < 5:
-                self.score_to_win = user_input
-                print(f"Score to win has been set to {user_input}!")
-            else:
+            try:
+                user_input = input(f"\nEnter the number of rounds needed to win (enter '2' for best 2 out of 3, etc.). "
+                                   f"Maximum is 5. ")
+                user_input = int(user_input)
+                if user_input > 5 or user_input <= 0:
+                    self.score_to_win = 2
+                    print("\nThat number is outside of the permitted range! Score to win has been automatically set "
+                          "to 2.")
+                elif 0 < user_input < 5:
+                    self.score_to_win = user_input
+                    print(f"\nScore to win has been set to {user_input}.")
+            except ValueError:
                 user_input = 'word'
-                print("Oops! Invalid input. Try again...")
+                print("\nOops! Invalid input. Try again...")
 
     def game_round(self):
-        player_one_choice = 1
-        player_two_choice = 1
-        while player_two_choice == player_one_choice:
+        # print("\nHere are all the available gestures:\n")
+        # self.display_gestures()
+        self.player_one.gesture.name = 'rock'
+        self.player_two.gesture.name = 'rock'
+        while self.player_one.gesture.name == self.player_two.gesture.name:
             player_one_choice = self.player_one.choose_gesture()
             player_two_choice = self.player_two.choose_gesture()
-            if player_one_choice == player_two_choice:
+            if player_one_choice.name == player_two_choice.name:
                 print(f"Oops! You both chose {player_one_choice.name}. Let's go again!")
-            print(f"{self.player_one.name} chose {self.player_one.gesture.name}. {self.player_two.name} chose "
-                  f"{self.player_two.gesture.name}.")
+        print(f"{self.player_one.name} chose {self.player_one.gesture.name}. {self.player_two.name} chose "
+              f"{self.player_two.gesture.name}.")
         if self.player_one.gesture.name in self.player_two.gesture.beats:
             self.player_two.score += 1
             attack_word_index = self.player_two.gesture.beats.index(self.player_one.gesture.name)
             attack_word = self.player_two.gesture.attack_words[attack_word_index]
-            print(f"\n{self.player_two.gesture.name} {attack_word} {self.player_one.gesture.name}!\n"
+            print(f"\n{self.player_two.gesture.name} {attack_word} {self.player_one.gesture.name}...\n"
                   f"{self.player_two.name} wins the round! ")
         else:
             self.player_one.score += 1
             attack_word_index = self.player_one.gesture.beats.index(self.player_two.gesture.name)
             attack_word = self.player_one.gesture.attack_words[attack_word_index]
-            print(f"\n{self.player_one.gesture.name} {attack_word} {self.player_two.gesture.name}!\n"
+            print(f"\n{self.player_one.gesture.name} {attack_word} {self.player_two.gesture.name}...\n"
                   f"{self.player_one.name} wins the round! ")
         print(f"\n{self.player_one.name} score: {self.player_one.score}\n"
               f"{self.player_two.name} score: {self.player_two.score}")

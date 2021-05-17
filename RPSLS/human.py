@@ -13,14 +13,15 @@ class Human(Player):
     def choose_gesture(self):
         gesture = ''
         while gesture == '':
-            user_choice = getpass(f"{self.name}'s turn. Choose a gesture to throw! ")
+            user_choice = input(f"\n{self.name}, choose a gesture to throw! ")
+            user_choice = user_choice.upper()
             i = 0
             while i < len(GestureOptions().list):
                 if user_choice == GestureOptions().list[i].name:
                     gesture = GestureOptions().list[i]
                 i += 1
             if gesture == '':
-                print("Oops! Invalid input. Try again...")
+                print("\nOops! Invalid input. Try again...")
         self.gesture = gesture
         return gesture
 
