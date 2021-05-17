@@ -11,9 +11,9 @@ class Human(Player):
         self.name = input("Enter your name: ")
 
     def choose_gesture(self):
-        user_choice = getpass(f"{self.name}'s turn. Choose a gesture to throw! ")
         gesture = ''
         while gesture == '':
+            user_choice = getpass(f"{self.name}'s turn. Choose a gesture to throw! ")
             i = 0
             while i < len(GestureOptions().list):
                 if user_choice == GestureOptions().list[i].name:
