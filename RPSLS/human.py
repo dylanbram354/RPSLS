@@ -2,6 +2,7 @@ from player import Player
 from gesture_options import GestureOptions
 from getpass import getpass
 
+
 class Human(Player):
     def __init__(self):
         super().__init__()
@@ -20,6 +21,7 @@ class Human(Player):
                 i += 1
             if gesture == '':
                 print("Oops! Invalid input. Try again...")
+        self.gesture = gesture
         return gesture
 
 

@@ -10,5 +10,6 @@ class AI(Player):
 
     def choose_gesture(self):
         print("AI's turn. Selecting gesture to throw...")
-        gesture = random.choice(GestureOptions.list)
+        gesture = random.choice(GestureOptions().list)
+        self.gesture = gesture
         return gesture
