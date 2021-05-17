@@ -1,7 +1,5 @@
 class Gesture:
-    def __init__(self, name, beats):
+    def __init__(self, name, beats, attack_words):
         self.name = name
         self.beats = beats
-
-    def attack_word(self, loser):
-        pass
+        self.attack_words = attack_words
