@@ -13,7 +13,7 @@ class Human(Player):
     def choose_gesture(self):
         gesture = ''
         while gesture == '':
-            user_choice = input(f"\n{self.name}, choose a gesture to throw! ")
+            user_choice = getpass(f"\n{self.name}, choose a gesture to throw! ")
             user_choice = user_choice.upper()
             i = 0
             while i < len(GestureOptions().list):

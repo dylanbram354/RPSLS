@@ -36,8 +36,6 @@ class Game:
             else:
                 print("\nOops! Invalid input, try again...")
 
-
-
     def display_gestures(self):
         GestureOptions().create_gesture_list()
         gestures = GestureOptions().list
@@ -46,7 +44,6 @@ class Game:
             print(f"{gestures[i].name} {gestures[i].attack_words[0]} {gestures[i].beats[0]} and "
                   f"{gestures[i].attack_words[1]} {gestures[i].beats[1]}")
             i += 1
-
 
     def select_players(self):
         player_one = Human()
@@ -112,6 +109,3 @@ class Game:
                   f"{self.player_one.name} wins the round! ")
         print(f"\n{self.player_one.name} score: {self.player_one.score}\n"
               f"{self.player_two.name} score: {self.player_two.score}")
-
-
-
