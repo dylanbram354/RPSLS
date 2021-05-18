@@ -42,25 +42,25 @@ class Game:
             print(f"{element.name} {element.attack_words[0]} {element.beats[0]} and "
                   f"{element.attack_words[1]} {element.beats[1]}")
 
-    def select_players(self):
-        player_one = Human()
-        player_one.choose_name()
-        user_input = 'word'
-        while user_input == 'word':
-            user_input = input(f"\nHello {player_one.name}! Would you like to play single-player or multiplayer? "
-                               f"Enter '1' for single-player or '2' for multiplayer. ")
-            if user_input == '1':
-                print("\nYou have selected single-player! You will play against an AI opponent.")
-                player_two = AI()
-            elif user_input == '2':
-                print("\nYou have selected multiplayer! Player two, please enter your name below. ")
-                player_two = Human()
-                player_two.choose_name()
-            else:
-                user_input = 'word'
-                print("\nOops! Invalid input. Try again... ")
-        self.player_one = player_one
-        self.player_two = player_two
+    # def select_players(self):
+    #     player_one = Human()
+    #     player_one.choose_name()
+    #     user_input = 'word'
+    #     while user_input == 'word':
+    #         user_input = input(f"\nHello {player_one.name}! Would you like to play single-player or multiplayer? "
+    #                            f"Enter '1' for single-player or '2' for multiplayer. ")
+    #         if user_input == '1':
+    #             print("\nYou have selected single-player! You will play against an AI opponent.")
+    #             player_two = AI()
+    #         elif user_input == '2':
+    #             print("\nYou have selected multiplayer! Player two, please enter your name below. ")
+    #             player_two = Human()
+    #             player_two.choose_name()
+    #         else:
+    #             user_input = 'word'
+    #             print("\nOops! Invalid input. Try again... ")
+    #     self.player_one = player_one
+    #     self.player_two = player_two
 
     def select_players_two_ai(self):
         player_one = Human()
@@ -82,7 +82,7 @@ class Game:
                 player_one = AI()
                 player_one.name = input("\nEnter a name for AI player one: ")
                 player_two = AI()
-                player_two.name = input("\nENter a name for AI player two: ")
+                player_two.name = input("\nEnter a name for AI player two: ")
             else:
                 user_input = 'word'
                 print("\nOops! Invalid input. Try again... ")
